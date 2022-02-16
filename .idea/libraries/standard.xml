@@ -1,0 +1,18 @@
+<component name="libraryTable">
+  <library name="standard">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../java deve/standard.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../java deve/jstl.jar!/" />
+      <root url="file://$PROJECT_DIR$/../../java deve" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../../java deve/JDBC/src" />
+      <root url="file://$PROJECT_DIR$/../../java deve/day1229/src" />
+      <root url="file://$PROJECT_DIR$/../../java deve/day1230/src" />
+      <root url="file://$PROJECT_DIR$/../../java deve/day1231/src" />
+      <root url="file://$PROJECT_DIR$/../../java deve/webtest/src" />
+    </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/../../java deve" recursive="false" />
+  </library>
+</component>
