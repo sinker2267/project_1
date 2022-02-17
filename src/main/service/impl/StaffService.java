@@ -3,8 +3,11 @@ package main.service.impl;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import main.dao.IDeptDao;
 import main.dao.IStaffDao;
+import main.dao.impl.DeptDao;
 import main.dao.impl.StaffDao;
+import main.model.Dept;
 import main.model.Staff;
 import main.service.IStaffService;
 import main.util.DBHelper;
@@ -18,6 +21,7 @@ import java.util.Map;
 public class StaffService implements IStaffService{
 
 	private IStaffDao staffDao = new StaffDao();
+	private IDeptDao deptDao = new DeptDao();
 	
 	@Override
 	public boolean login(HttpServletRequest req) {
@@ -129,6 +133,25 @@ public class StaffService implements IStaffService{
 		Staff staff = new Staff();
 		staff.setId(Integer.parseInt(id));
 		return staffDao.deleteStaff(staff);
+	}
+
+	@Override
+	public int addStaff(HttpServletRequest req) {
+		String staffName = req.getParameter("staffName");
+		String pass = MD5Util.encode(req.getParameter("pass"));
+		String phone= req.getParameter("phone");
+		Integer deptId = null;
+		String deptName = null;
+		if(!StrUtil.isEmpty(req.getParameter("deptId"))){
+			deptId = Integer.parseInt(req.getParameter("deptId"));
+		}
+		Staff staff = new Staff();
+		staff.setStaffName(staffName);
+		staff.setDeptName(deptName);
+		staff.setPass(pass);
+		staff.setPhone(phone);
+		staff.setDeptId(deptId);
+		return staffDao.addStaff(staff);
 	}
 
 }

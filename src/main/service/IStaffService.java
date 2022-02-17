@@ -25,4 +25,6 @@ public interface IStaffService {
 	public int updateStaff(HttpServletRequest req);
 
 	public int deleteStaff(HttpServletRequest req);
+
+	public int addStaff(HttpServletRequest req);
 }

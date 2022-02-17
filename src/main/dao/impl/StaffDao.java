@@ -134,8 +134,58 @@ public class StaffDao implements IStaffDao {
 			sql.append(" and staff_name = '" + s.getStaffName() + "'");
 			and = true;
 		}
-		System.out.println(sql);
 		return DBHelper.deal(sql.toString(),null);
+	}
+
+	@Override
+	public int addStaff(Staff s) {
+		boolean lflag = false;
+		boolean rflag = false;
+		StringBuffer lsql = new StringBuffer("insert into staff (");
+		StringBuffer rsql = new StringBuffer(" values (");
+		if(s.getId() != null){
+			if(lflag) lsql.append(",");
+			lsql.append("id");
+			if(rflag) rsql.append(",");
+			rsql.append(s.getId());
+			lflag = true;
+			rflag = true;
+		}
+		if(!StrUtil.isEmpty(s.getStaffName())){
+			if(lflag) lsql.append(",");
+			lsql.append("staff_name");
+			if(rflag) rsql.append(",");
+			rsql.append("'"+s.getStaffName()+"'");
+			lflag = true;
+			rflag = true;
+		}
+		if(!StrUtil.isEmpty(s.getPass())){
+			if(lflag) lsql.append(",");
+			lsql.append("pass");
+			if(rflag) rsql.append(",");
+			rsql.append("'"+s.getPass()+"'");
+			lflag = true;
+			rflag = true;
+		}
+		if(!StrUtil.isEmpty(s.getPhone())){
+			if(lflag) lsql.append(",");
+			lsql.append("phone");
+			if(rflag) rsql.append(",");
+			rsql.append("'"+s.getPhone()+"'");
+			lflag = true;
+			rflag = true;
+		}
+		if(s.getDeptId() != null){
+			if(lflag) lsql.append(",");
+			lsql.append("dept_id");
+			if(rflag) rsql.append(",");
+			rsql.append(s.getDeptId());
+			lflag = true;
+			rflag = true;
+		}
+		lsql.append(")");
+		rsql.append(")");
+		return DBHelper.deal(lsql.append(rsql).toString(), null);
 	}
 
 }

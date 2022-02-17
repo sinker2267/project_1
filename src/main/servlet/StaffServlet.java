@@ -62,4 +62,13 @@ public class StaffServlet extends BaseServlet{
 		}
 	}
 
+	public void addStaff(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException, SQLException {
+		if(staffService.addStaff(req) == 1){
+			responseObject("1", res);
+		}
+		else{
+			responseObject("0", res);
+		}
+	}
+
 }

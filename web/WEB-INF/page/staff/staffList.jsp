@@ -56,7 +56,7 @@
                 <div class="layui-card-header">员工列表</div>
                 <div class="layui-card-body">
                     <div>
-                        <button class="layui-btn layui-btn-sm" onclick="openWin();">添加</button>
+                        <button class="layui-btn layui-btn-sm" onclick="addStaffWin()">添加</button>
                     </div>
                     <table class="layui-table">
                         <!-- 设置每一个单元格的占得宽度 -->
@@ -142,6 +142,14 @@
             title: "修改员工信息",
             area: ['450px', '530px'],
             content: "PageServlet?method=updateStaffPage&id="+id,
+        });
+    }
+    function addStaffWin(){
+        layer.open({
+            type: 2,
+            title: "添加员工信息",
+            area: ['450px', '530px'],
+            content: "PageServlet?method=addStaffPage",
         });
     }
     function deleteOpenWin(id){

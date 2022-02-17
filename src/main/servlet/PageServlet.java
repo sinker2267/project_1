@@ -27,10 +27,17 @@ public class PageServlet extends BaseServlet{
         req.getRequestDispatcher("/WEB-INF/page/register.jsp").forward(req, res);
     }
 
+    //跳转到更新员工信息页面
     public void updateStaffPage(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         staffService.queryOne(req);
         depeService.getDeptList(req);
         req.getRequestDispatcher("/WEB-INF/page/staff/updateStaff.jsp").forward(req, res);
+    }
+
+    //跳转到添加员工页面
+    public void addStaffPage(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        depeService.getDeptList(req);
+        req.getRequestDispatcher("/WEB-INF/page/staff/addStaff.jsp").forward(req, res);
     }
 
 }

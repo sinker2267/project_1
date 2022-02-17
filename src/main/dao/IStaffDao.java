@@ -21,4 +21,6 @@ public interface IStaffDao {
     int updateStaff(Staff s);
 
     int deleteStaff(Staff s);
+
+    int addStaff(Staff s);
 }
