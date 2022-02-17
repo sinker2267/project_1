@@ -1,13 +1,19 @@
 package main.servlet;
 
 import main.service.impl.DepeService;
+import main.service.impl.StaffService;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 public class DeptServlet extends BaseServlet{
     DepeService depeService = new DepeService();
-    public void getDeptList(HttpServletRequest req, HttpServletResponse res){
+    StaffService staffService = new StaffService();
+    public void getDeptList(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         depeService.getDeptList(req);
+        staffService.getLeaderList(req);
+        req.getRequestDispatcher("/WEB-INF/page/dept/deptList.jsp").forward(req, res);
     }
 }

@@ -43,7 +43,7 @@
         </ul>
     </div>
     <div class="layui-side layui-bg-black">
-        <div class="layui-side-scroll">
+        <div class="layui-side-scroll ">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree" lay-filter="test" >
                 <li class="layui-nav-item layui-nav-itemed">
@@ -58,7 +58,7 @@
                 <li class="layui-nav-item">
                     <a href="javascript:;"><i class="layui-icon">&#xe642;</i>部门管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="DeptServlet?method=ToPartList" target="contextPage">部门列表</a></dd>
+                        <dd><a href="DeptServlet?method=getDeptList" target="contextPage">部门列表</a></dd>
                         <dd><a >新增部门</a></dd>
                     </dl>
                 </li>

@@ -107,7 +107,17 @@ public class DBHelper {
 			if(rs != null) rs = null;
 		}
 	}
-	
+	public static <T> int countAll(String sql, Object... params) throws SQLException {
+		init();
+		int totalCount = 0;
+		ps = conn.prepareStatement(sql);
+		rs = ps.executeQuery();
+		while (rs.next()) {//向下读一行
+			//读取第一个参数
+			totalCount = rs.getInt(1);
+		}
+		return totalCount;
+	}
 	//数据库字段（下划线命名）转变量（驼峰命名）
 	public static String getParam(String column) {
 		String[] arr = column.split("_");

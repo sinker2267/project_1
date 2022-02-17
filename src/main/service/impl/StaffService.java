@@ -11,6 +11,7 @@ import main.util.DBHelper;
 import main.util.MD5Util;
 import main.util.StrUtil;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class StaffService implements IStaffService{
@@ -58,7 +59,7 @@ public class StaffService implements IStaffService{
 	}
 
 	@Override
-	public void getStaffList(HttpServletRequest req) {
+	public void getStaffList(HttpServletRequest req) throws SQLException {
 		Staff staff = new Staff();
 		String deptId = req.getParameter("deptId");
 		if(!StrUtil.isEmpty(deptId)){
@@ -76,8 +77,47 @@ public class StaffService implements IStaffService{
 		if(!StrUtil.isEmpty(staffName)){
 			staff.setStaffName(staffName);
 		}
-		List<Staff> staffList = staffDao.queryAll(staff);
+		req.setAttribute("queryDemo",staff);
+		Integer pageNo = new Integer(1);
+		Integer pageCount = new Integer(4);
+		Integer totalCount = staffDao.countAll(staff);
+		if(!StrUtil.isEmpty(req.getParameter("pageNo")) && !StrUtil.isEmpty(req.getParameter("pageCount"))){
+			pageNo = Integer.parseInt(req.getParameter("pageNo"));
+			pageCount = Integer.parseInt(req.getParameter("pageCount"));
+		}
+		req.setAttribute("pageNo",pageNo);
+		req.setAttribute("pageCount",pageCount);
+		req.setAttribute("totalCount",totalCount);
+		List<Staff> staffList = staffDao.queryAll(staff, pageNo, pageCount);
 		req.setAttribute("staff",staffList);
+	}
+
+	@Override
+	public void getLeaderList(HttpServletRequest req) {
+		Staff staff = new Staff();
+		req.setAttribute("leaderList", staffDao.queryLeader(staff));
+	}
+
+	@Override
+	public void queryOne(HttpServletRequest req) {
+		Staff staff = new Staff();
+		Integer id = Integer.parseInt(req.getParameter("id"));
+		staff.setId(id);
+		req.setAttribute("updateStaff",staffDao.queryOne(staff));
+	}
+
+	@Override
+	public int updateStaff(HttpServletRequest req) {
+		String id = req.getParameter("id");
+		String staffName = req.getParameter("staffName");
+		String phone = req.getParameter("phone");
+		String deptId = req.getParameter("deptId");
+		Staff staff = new Staff();
+		staff.setId(Integer.parseInt(id));;
+		staff.setStaffName(staffName);
+		staff.setPhone(phone);
+		staff.setDeptId(Integer.parseInt(deptId));
+		return staffDao.updateStaff(staff);
 	}
 
 }

@@ -20,6 +20,7 @@ public class BaseServlet extends HttpServlet{
 		
 		try {
 			/* 通过此对象获取类，再获取类中指定名称并传入参数类型的对应Class对象 */
+			//System.out.println(this.getClass());
 		    Method method = this.getClass().getDeclaredMethod(methodName, HttpServletRequest.class, HttpServletResponse.class);
 			 /* 执行方法，this实际上是StudentManage对象 */
 		    method.invoke(this, req, resp);
