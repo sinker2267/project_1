@@ -52,14 +52,12 @@
                         <dd><a href="StaffServlet?method=getStaffList" target="contextPage">
                             员工列表
                         </a></dd>
-                        <dd><a href="StaffServlet?method=getStaffList" target="contextPage">增加员工</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
                     <a href="javascript:;"><i class="layui-icon">&#xe642;</i>部门管理</a>
                     <dl class="layui-nav-child">
                         <dd><a href="DeptServlet?method=getDeptList" target="contextPage">部门列表</a></dd>
-                        <dd><a >新增部门</a></dd>
                     </dl>
                 </li>
             </ul>

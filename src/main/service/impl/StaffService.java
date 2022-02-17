@@ -93,14 +93,14 @@ public class StaffService implements IStaffService{
 		req.setAttribute("pageNo",pageNo);
 		req.setAttribute("pageCount",pageCount);
 		req.setAttribute("totalCount",totalCount);
-		List<Staff> staffList = staffDao.queryAll(staff, pageNo, pageCount);
-		req.setAttribute("staff",staffList);
+		req.setAttribute("staff",staffDao.queryAll(staff, pageNo, pageCount));
 	}
 
 	@Override
 	public void getLeaderList(HttpServletRequest req) {
 		Staff staff = new Staff();
-		req.setAttribute("leaderList", staffDao.queryLeader(staff));
+		List<Staff> list = staffDao.queryLeader(staff);
+		req.setAttribute("leaderList", list);
 	}
 
 	@Override

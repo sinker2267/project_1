@@ -59,7 +59,7 @@ public class StaffDao implements IStaffDao {
 
 	@Override
 	public List<Staff> queryLeader(Staff s) {
-		String sql = "SELECT staff.*,dept.dept_name FROM staff , dept where staff.id = dept.leader_id";
+		String sql = "SELECT staff.* FROM staff  where staff.staff_type = 1";
 		return DBHelper.queryAll(sql, Staff.class, null);
 	}
 

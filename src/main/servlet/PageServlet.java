@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class PageServlet extends BaseServlet{
     StaffService staffService = new StaffService();
@@ -28,16 +29,23 @@ public class PageServlet extends BaseServlet{
     }
 
     //跳转到更新员工信息页面
-    public void updateStaffPage(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+    public void updateStaffPage(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException, SQLException {
         staffService.queryOne(req);
         depeService.getDeptList(req);
         req.getRequestDispatcher("/WEB-INF/page/staff/updateStaff.jsp").forward(req, res);
     }
 
     //跳转到添加员工页面
-    public void addStaffPage(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+    public void addStaffPage(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException, SQLException {
         depeService.getDeptList(req);
         req.getRequestDispatcher("/WEB-INF/page/staff/addStaff.jsp").forward(req, res);
+    }
+
+    //跳转到修改部门页面
+    public void updateDeptPage(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException, SQLException {
+        depeService.queryOne(req);
+        staffService.getLeaderList(req);
+        req.getRequestDispatcher("/WEB-INF/page/dept/updateDept.jsp").forward(req, res);
     }
 
 }

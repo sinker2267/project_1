@@ -33,7 +33,9 @@
                             <select name="leaderId">
                                 <option value="">主管</option>
                                 <c:forEach items="${requestScope.leaderList}" var="leader">
-                                    <option value="${leader.id}">${leader.staffName}</option>
+                                    <option value="${leader.id}"
+                                            <c:if test="${requestScope.queryDeptDemo.leaderId == leader.id }">selected="selected"</c:if>
+                                    >${leader.staffName}</option>
                                 </c:forEach>
                             </select>
                         </div>
@@ -48,7 +50,7 @@
     <div class="layui-row">
         <div class="layui-col-md12">
             <div class="layui-card">
-                <div class="layui-card-header">员工列表</div>
+                <div class="layui-card-header">部门列表</div>
                 <div class="layui-card-body">
                     <div>
                         <button class="layui-btn layui-btn-sm" onclick="openWin();">添加</button>
@@ -77,8 +79,7 @@
                                 <td>${d.deptName}</td>
                                 <td>${d.leaderName }</td>
                                 <td>
-                                        <%--                                    <button class="layui-btn layui-btn-sm" onclick="openWin()">更新</button>--%>
-                                    <button class="layui-btn layui-btn-primary layui-btn-sm" onclick=""><i class="layui-icon">&#xe642;</i></button>
+                                    <button class="layui-btn layui-btn-primary layui-btn-sm" onclick="openWin(${d.id})"><i class="layui-icon">&#xe642;</i></button>
                                     <button class="layui-btn layui-btn-primary layui-btn-sm" onclick=""><i class="layui-icon">&#xe640;</i></button>
                                 </td>
                             </tr>
@@ -95,6 +96,7 @@
 </div>
 </body>
 <script src="${pageContext.request.contextPath}/static/layui/layui.js"></script>
+<script src="${pageContext.request.contextPath}/static/assets/libs/jquery-1.12.4/jquery.min.js"></script>
 <script>
     layui.use('form', function(){
         var form = layui.form;
@@ -109,27 +111,31 @@
         //执行一个laypage实例
         laypage.render({
             elem: 'lp' //注意，这里的 test1 是 ID，不用加 # 号
-            ,count: 50 //数据总数，从服务端得到
-            ,limit: 10 //每页显示的条数，laypage将会借助 count 和 limit 计算出分页数。
+            ,count: ${requestScope.totalCount} //数据总数，从服务端得到
+            ,limit: ${requestScope.pageCount}//每页显示的条数，laypage将会借助 count 和 limit 计算出分页数。
+            ,curr: ${requestScope.pageNo} //起始页码
             ,jump: function(obj, first){
                 //obj包含了当前分页的所有参数，比如：
-                console.log(obj.curr); //得到当前页，以便向服务端请求对应页的数据。
-                console.log(obj.limit); //得到每页显示的条数
-
+                var pageNo = obj.curr;
+                var pageCount = obj.limit;
+                var url = "DeptServlet?method=getDeptList&pageNo=" + pageNo;
+                url += "&pageCount="+ pageCount;
+                url += "&"+$("form").serialize();
+                console.log(url);
                 //首次不执行
                 if(!first){
-                    //do something
+                    window.location.href = url;
                 }
             }
         });
     });
 
-    function openWin(){
+    function openWin(id){
         layer.open({
             type: 2,
-            title: "员工信息",
+            title: "修改部门信息",
             area: ['450px', '530px'],
-            content: "user_update.html"
+            content: "PageServlet?method=updateDeptPage&id="+id,
         });
     }
 
