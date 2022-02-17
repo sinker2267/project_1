@@ -53,5 +53,13 @@ public class StaffServlet extends BaseServlet{
 			responseObject("0", res);
 		}
 	}
+	public void deleteStaff(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException, SQLException {
+		if(staffService.deleteStaff(req) == 1){
+			responseObject("1", res);
+		}
+		else{
+			responseObject("0", res);
+		}
+	}
 
 }

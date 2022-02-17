@@ -19,4 +19,6 @@ public interface IStaffDao {
     int countAll(Staff s) throws SQLException;
 
     int updateStaff(Staff s);
+
+    int deleteStaff(Staff s);
 }

@@ -23,4 +23,6 @@ public interface IStaffService {
 	public void queryOne(HttpServletRequest req);
 
 	public int updateStaff(HttpServletRequest req);
+
+	public int deleteStaff(HttpServletRequest req);
 }

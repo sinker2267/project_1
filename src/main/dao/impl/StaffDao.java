@@ -95,10 +95,46 @@ public class StaffDao implements IStaffDao {
 			sql.append(" staff_name = '" + s.getStaffName() + "',");
 		}
 		if(s.getDeptId() != null){
-			sql.append(" dept_id = " + s.getDeptId());
+			sql.append(" dept_id = " + s.getDeptId() + ",");
 		}
+		if(!StrUtil.isEmpty(s.getPass())){
+			sql.append(" staff_name = '" + s.getStaffName() + "',");
+		}
+		sql.append(" id = " + s.getId());
 		sql.append(" where id = " + s.getId());
-		//System.out.println(sql);
+		return DBHelper.deal(sql.toString(),null);
+	}
+
+	@Override
+	public int deleteStaff(Staff s) {
+		boolean and = false;
+		StringBuffer sql = new StringBuffer("delete from staff where ");
+		if(s.getId() != null){
+			if(and) sql.append(" and");
+			sql.append(" id = " + s.getId());
+			and = true;
+		}
+		if(!StrUtil.isEmpty(s.getPhone())){
+			if(and) sql.append(" and");
+			sql.append(" and phone = '" + s.getPhone() +"'");
+			and = true;
+		}
+		if(!StrUtil.isEmpty(s.getStaffName())){
+			if(and) sql.append(" and");
+			sql.append(" and staff_name = '" + s.getStaffName() + "'");
+			and = true;
+		}
+		if(s.getDeptId() != null){
+			if(and) sql.append(" and");
+			sql.append(" and dept_id = " + s.getDeptId() + "");
+			and = true;
+		}
+		if(!StrUtil.isEmpty(s.getPass())){
+			if(and) sql.append(" and");
+			sql.append(" and staff_name = '" + s.getStaffName() + "'");
+			and = true;
+		}
+		System.out.println(sql);
 		return DBHelper.deal(sql.toString(),null);
 	}
 

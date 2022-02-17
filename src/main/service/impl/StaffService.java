@@ -13,6 +13,7 @@ import main.util.StrUtil;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 public class StaffService implements IStaffService{
 
@@ -82,8 +83,8 @@ public class StaffService implements IStaffService{
 		Integer pageCount = new Integer(4);
 		Integer totalCount = staffDao.countAll(staff);
 		if(!StrUtil.isEmpty(req.getParameter("pageNo")) && !StrUtil.isEmpty(req.getParameter("pageCount"))){
-			pageNo = Integer.parseInt(req.getParameter("pageNo"));
 			pageCount = Integer.parseInt(req.getParameter("pageCount"));
+			pageNo = Math.min(Integer.parseInt(req.getParameter("pageNo")), (totalCount + (pageCount - 1)) / pageCount);
 		}
 		req.setAttribute("pageNo",pageNo);
 		req.setAttribute("pageCount",pageCount);
@@ -112,12 +113,22 @@ public class StaffService implements IStaffService{
 		String staffName = req.getParameter("staffName");
 		String phone = req.getParameter("phone");
 		String deptId = req.getParameter("deptId");
+		String pass = req.getParameter("pass");
 		Staff staff = new Staff();
 		staff.setId(Integer.parseInt(id));;
 		staff.setStaffName(staffName);
 		staff.setPhone(phone);
 		staff.setDeptId(Integer.parseInt(deptId));
+		staff.setPass(pass);
 		return staffDao.updateStaff(staff);
+	}
+
+	@Override
+	public int deleteStaff(HttpServletRequest req) {
+		String id = req.getParameter("id");
+		Staff staff = new Staff();
+		staff.setId(Integer.parseInt(id));
+		return staffDao.deleteStaff(staff);
 	}
 
 }
