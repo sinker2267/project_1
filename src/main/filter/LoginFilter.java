@@ -35,14 +35,15 @@ public class LoginFilter implements Filter{
 			return;//return之后，请求不能到达servlet
 		}
 		//验证session是否失效
-		HttpServletRequest req = (HttpServletRequest) request;
-		HttpSession session = req.getSession();
-		if (session.getAttribute("staff") == null && !methodName.equals("registerPage") && !methodName.equals("loginPage")) {
-//			请求转发
-			req.getRequestDispatcher("/WEB-INF/page/login.jsp").forward(request, response);
-		} else {
-			//放行，请求被放行之后到达servlet
-			chain.doFilter(request, response);
-		}
+//		HttpServletRequest req = (HttpServletRequest) request;
+//		HttpSession session = req.getSession();
+//		if (session.getAttribute("staff") == null && !methodName.equals("registerPage") && !methodName.equals("loginPage")) {
+////			请求转发
+//			req.getRequestDispatcher("/WEB-INF/page/login.jsp").forward(request, response);
+//		} else {
+//			//放行，请求被放行之后到达servlet
+//			chain.doFilter(request, response);
+//		}
+		chain.doFilter(request, response);
 	}
 }

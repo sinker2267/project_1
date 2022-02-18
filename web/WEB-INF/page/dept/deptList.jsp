@@ -60,14 +60,16 @@
                         <colgroup>
                             <col width="20%">
                             <col width="20%">
-                            <col width="30%">
-                            <col width="30%">
+                            <col width="20%">
+                            <col width="20%">
+                            <col width="20%">
                             <col>
                         </colgroup>
                         <thead>
                         <tr>
                             <th>部门编号</th>
                             <th>部门名称</th>
+                            <th>部门人数</th>
                             <th>主管</th>
                             <th>操作</th>
                         </tr>
@@ -77,6 +79,7 @@
                             <tr>
                                 <td>${d.id}</td>
                                 <td>${d.deptName}</td>
+                                <td>${d.staffNum}</td>
                                 <td>${d.leaderName }</td>
                                 <td>
                                     <button class="layui-btn layui-btn-primary layui-btn-sm" onclick="openWin(${d.id})"><i class="layui-icon">&#xe642;</i></button>

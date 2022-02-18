@@ -5,8 +5,17 @@ public class Dept {
     private String deptName;
     private Integer leaderId;
     private String leaderName;
+    private Long staffNum;
 
     public Dept() {
+    }
+
+    public Long getStaffNum() {
+        return staffNum;
+    }
+
+    public void setStaffNum(Long staffNum) {
+        this.staffNum = staffNum;
     }
 
     public Integer getId() {

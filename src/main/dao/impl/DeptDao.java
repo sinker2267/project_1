@@ -10,12 +10,12 @@ import java.util.List;
 
 public class DeptDao implements IDeptDao {
     @Override
-    public Dept queryOne(Dept d) {
+    public Dept queryOne(Dept d) throws SQLException {
         return queryAll(d,null,null).get(0);
     }
 
     @Override
-    public List<Dept> queryAll(Dept d, Integer pageNo, Integer pageCount) {
+    public List<Dept> queryAll(Dept d, Integer pageNo, Integer pageCount) throws SQLException {
         StringBuffer sql = new StringBuffer("SELECT d.*,s.staff_name as leader_name FROM dept as d LEFT JOIN staff as s on d.leader_id = s.id WHERE 1 = 1");
         if (d.getId() != null) {
             sql.append(" and d.id = " + d.getId());
@@ -29,9 +29,19 @@ public class DeptDao implements IDeptDao {
         if(!StrUtil.isEmpty(d.getLeaderName())) {
             sql.append(" and d.leader_name = '" + d.getLeaderName() + "'");
         }
-        if(!StrUtil.isEmpty(pageCount) && !StrUtil.isEmpty(pageNo)){
+        if(!StrUtil.isEmpty(pageCount) && !StrUtil.isEmpty(pageNo) ){
             sql.append(" LIMIT " + (pageNo-1)*pageCount + "," + pageCount);
         }
+        List<Dept> list = DBHelper.queryAll(sql.toString(), Dept.class, null);
+        for (Dept dept : list) {
+            dept.setStaffNum(queryNum(dept.getId()));
+        }
+        return list;
+    }
+
+    @Override
+    public List<Dept> queryAllNotLimit(Dept d) {
+        StringBuffer sql = new StringBuffer("SELECT d.*,s.staff_name as leader_name FROM dept as d LEFT JOIN staff as s on d.leader_id = s.id WHERE 1 = 1");
         return DBHelper.queryAll(sql.toString(), Dept.class, null);
     }
 
@@ -123,5 +133,11 @@ public class DeptDao implements IDeptDao {
         lsql.append(")");
         rsql.append(")");
         return DBHelper.deal(lsql.append(rsql).toString(), null);
+    }
+
+    @Override
+    public Long queryNum(Integer id) throws SQLException {
+        StringBuffer sql = new StringBuffer("select COUNT(*) staff_num from staff where dept_id = ").append(id);
+        return DBHelper.count(sql.toString(),null);
     }
 }

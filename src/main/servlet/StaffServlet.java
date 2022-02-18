@@ -41,7 +41,7 @@ public class StaffServlet extends BaseServlet{
 	//查询员工列表
 	public void getStaffList(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException, SQLException {
 		staffService.getStaffList(req);
-		deptService.getDeptList(req);
+		deptService.getDeptListNotLimit(req);
 		req.getRequestDispatcher("/WEB-INF/page/staff/staffList.jsp").forward(req, res);
 	}
 

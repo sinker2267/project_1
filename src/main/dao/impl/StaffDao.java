@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import main.dao.IStaffDao;
+import main.model.Dept;
 import main.model.Staff;
 import main.util.DBHelper;
 import main.util.StrUtil;
@@ -41,6 +42,13 @@ public class StaffDao implements IStaffDao {
 		if(!StrUtil.isEmpty(pageCount) && !StrUtil.isEmpty(pageNo)){
 			sql.append(" LIMIT " + (pageNo-1)*pageCount + "," + pageCount);
 		}
+		return DBHelper.queryAll(sql.toString(), Staff.class, null);
+	}
+
+	@Override
+	public List<Staff> queryAllNotLimit(Staff s) {
+		StringBuffer sql = new StringBuffer("SELECT s.*,d.dept_name FROM staff as s LEFT JOIN dept as d " +
+				"on s.dept_id = d.id WHERE 1 = 1");
 		return DBHelper.queryAll(sql.toString(), Staff.class, null);
 	}
 

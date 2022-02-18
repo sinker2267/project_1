@@ -43,7 +43,7 @@ public class DepeService implements IDeptService {
     }
 
     @Override
-    public void queryOne(HttpServletRequest req) {
+    public void queryOne(HttpServletRequest req) throws SQLException {
         Dept dept = new Dept();
         Integer id = Integer.parseInt(req.getParameter("id"));
         dept.setId(id);
@@ -83,5 +83,10 @@ public class DepeService implements IDeptService {
         dept.setDeptName(deptName);
         dept.setLeaderId(leaderId);
         return deptDao.addDept(dept);
+    }
+
+    @Override
+    public void getDeptListNotLimit(HttpServletRequest req) {
+        req.setAttribute("deptList",deptDao.queryAllNotLimit(null));
     }
 }

@@ -154,4 +154,9 @@ public class StaffService implements IStaffService{
 		return staffDao.addStaff(staff);
 	}
 
+	@Override
+	public void getLeaderListNotLimit(HttpServletRequest req) {
+		req.setAttribute("leaderList",staffDao.queryAllNotLimit(null));
+	}
+
 }

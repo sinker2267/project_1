@@ -14,7 +14,7 @@ public class DeptServlet extends BaseServlet{
     StaffService staffService = new StaffService();
     public void getDeptList(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException, SQLException {
         depeService.getDeptList(req);
-        staffService.getLeaderList(req);
+        staffService.getLeaderListNotLimit(req);
         req.getRequestDispatcher("/WEB-INF/page/dept/deptList.jsp").forward(req, res);
     }
     public void updateDept(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException, SQLException {

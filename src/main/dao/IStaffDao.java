@@ -1,5 +1,6 @@
 package main.dao;
 
+import main.model.Dept;
 import main.model.Staff;
 
 import java.sql.SQLException;
@@ -9,6 +10,8 @@ public interface IStaffDao {
     Staff queryOne(Staff s);
 
     List<Staff> queryAll(Staff s, Integer pageNo, Integer pageCount);
+
+    List<Staff> queryAllNotLimit(Staff s);
 
     int update(Staff s);
 

@@ -31,7 +31,7 @@ public class PageServlet extends BaseServlet{
     //跳转到更新员工信息页面
     public void updateStaffPage(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException, SQLException {
         staffService.queryOne(req);
-        depeService.getDeptList(req);
+        depeService.getDeptListNotLimit(req);
         req.getRequestDispatcher("/WEB-INF/page/staff/updateStaff.jsp").forward(req, res);
     }
 
@@ -44,13 +44,13 @@ public class PageServlet extends BaseServlet{
     //跳转到修改部门页面
     public void updateDeptPage(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException, SQLException {
         depeService.queryOne(req);
-        staffService.getLeaderList(req);
+        staffService.getLeaderListNotLimit(req);
         req.getRequestDispatcher("/WEB-INF/page/dept/updateDept.jsp").forward(req, res);
     }
 
     //跳转到添加部门页面
     public void addDeptPage(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException, SQLException {
-        staffService.getLeaderList(req);
+        staffService.getLeaderListNotLimit(req);
         req.getRequestDispatcher("/WEB-INF/page/dept/addDept.jsp").forward(req, res);
     }
 

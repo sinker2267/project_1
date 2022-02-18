@@ -27,4 +27,6 @@ public interface IStaffService {
 	public int deleteStaff(HttpServletRequest req);
 
 	public int addStaff(HttpServletRequest req);
+
+	public void getLeaderListNotLimit(HttpServletRequest req);
 }
