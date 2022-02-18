@@ -66,4 +66,62 @@ public class DeptDao implements IDeptDao {
         sql.append(" where id = " + d.getId());
         return DBHelper.deal(sql.toString(),null);
     }
+
+    @Override
+    public int deleteDept(Dept d) {
+        boolean and = false;
+        StringBuffer sql = new StringBuffer("delete from dept where ");
+        if(d.getId() != null){
+            if(and) sql.append(" and");
+            sql.append(" id = " + d.getId());
+            and = true;
+        }
+        if(!StrUtil.isEmpty(d.getDeptName())){
+            if(and) sql.append(" and");
+            sql.append(" and dept_name = '" + d.getDeptName() +"'");
+            and = true;
+        }
+        if(d.getLeaderId() != null){
+            if(and) sql.append(" and");
+            sql.append(" and leader_id = " + d.getLeaderId() + "");
+            and = true;
+        }
+
+        return DBHelper.deal(sql.toString(),null);
+    }
+
+    @Override
+    public int addDept(Dept d) {
+        boolean lflag = false;
+        boolean rflag = false;
+        StringBuffer lsql = new StringBuffer("insert into dept (");
+        StringBuffer rsql = new StringBuffer(" values (");
+        if(d.getId() != null){
+            if(lflag) lsql.append(",");
+            lsql.append("id");
+            if(rflag) rsql.append(",");
+            rsql.append(d.getId());
+            lflag = true;
+            rflag = true;
+        }
+        if(!StrUtil.isEmpty(d.getDeptName())){
+            if(lflag) lsql.append(",");
+            lsql.append("dept_name");
+            if(rflag) rsql.append(",");
+            rsql.append("'"+d.getDeptName()+"'");
+            lflag = true;
+            rflag = true;
+        }
+        if(d.getLeaderId() != null){
+            if(lflag) lsql.append(",");
+            lsql.append("leader_id");
+            if(rflag) rsql.append(",");
+            rsql.append(d.getLeaderId());
+            lflag = true;
+            rflag = true;
+        }
+        lsql.append(")");
+        rsql.append(")");
+        return DBHelper.deal(lsql.append(rsql).toString(), null);
+    }
 }

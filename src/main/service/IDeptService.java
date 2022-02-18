@@ -10,4 +10,8 @@ public interface IDeptService {
     public void queryOne(HttpServletRequest req);
 
     public int updateDept(HttpServletRequest req);
+
+    public int deleteDept(HttpServletRequest req);
+
+    public int addDept(HttpServletRequest req);
 }

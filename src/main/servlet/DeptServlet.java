@@ -25,4 +25,22 @@ public class DeptServlet extends BaseServlet{
             responseObject("0", res);
         }
     }
+
+    public void deleteDept(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException, SQLException {
+        if(depeService.deleteDept(req) == 1){
+            responseObject("1", res);
+        }
+        else{
+            responseObject("0", res);
+        }
+    }
+
+    public void addDept(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException, SQLException {
+        if(depeService.addDept(req) == 1){
+            responseObject("1", res);
+        }
+        else{
+            responseObject("0", res);
+        }
+    }
 }

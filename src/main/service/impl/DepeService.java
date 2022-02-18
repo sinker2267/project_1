@@ -4,6 +4,7 @@ import main.dao.impl.DeptDao;
 import main.model.Dept;
 import main.model.Staff;
 import main.service.IDeptService;
+import main.util.MD5Util;
 import main.util.StrUtil;
 
 import javax.servlet.http.HttpServletRequest;
@@ -61,5 +62,26 @@ public class DepeService implements IDeptService {
         dept.setLeaderId(Integer.parseInt(leaderId));
 
         return deptDao.updateDept(dept);
+    }
+
+    @Override
+    public int deleteDept(HttpServletRequest req) {
+        String id = req.getParameter("id");
+        Dept dept = new Dept();
+        dept.setId(Integer.parseInt(id));
+        return deptDao.deleteDept(dept);
+    }
+
+    @Override
+    public int addDept(HttpServletRequest req) {
+        String deptName = req.getParameter("deptName");
+        Integer leaderId = null;
+        if(!StrUtil.isEmpty(req.getParameter("leaderId"))){
+            leaderId = Integer.parseInt(req.getParameter("leaderId"));
+        }
+        Dept dept = new Dept();
+        dept.setDeptName(deptName);
+        dept.setLeaderId(leaderId);
+        return deptDao.addDept(dept);
     }
 }

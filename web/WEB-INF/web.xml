@@ -64,7 +64,17 @@
     <filter-mapping>
         <filter-name>login</filter-name>
         <!-- 指定filter的拦截路径 -->
-        <url-pattern>/s</url-pattern>
+        <url-pattern>/Servlet</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>login</filter-name>
+        <!-- 指定filter的拦截路径 -->
+        <url-pattern>/PageServlet</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>login</filter-name>
+        <!-- 指定filter的拦截路径 -->
+        <url-pattern>/DeptServlet</url-pattern>
     </filter-mapping>
 
     <!-- 监听器 -->

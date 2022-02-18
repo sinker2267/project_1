@@ -11,19 +11,13 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>主页</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/static/layui/css/layui.css">
-    <style type="text/css">
-        .background{
-            position: absolute; top: 60px; padding-bottom: 44px;
-            background-image: url("${pageContext.request.contextPath}/static/assets/img/preview.jpg");
-            background-size: 100%;
-        }
-    </style>
 </head>
 <body>
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
-        <div class="layui-logo layui-hide-xs layui-bg-black"> ${sessionScope.staff.staffName} </div>
+        <div class="layui-logo layui-hide-xs layui-bg-black"> ${sessionScope.staff.staffName}</div>
         <!-- 头部区域（可配合layui 已有的水平导航） -->
         <ul class="layui-nav layui-layout-left">
             <!-- 移动端显示 -->
@@ -45,9 +39,9 @@
     <div class="layui-side layui-bg-black">
         <div class="layui-side-scroll ">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-            <ul class="layui-nav layui-nav-tree" lay-filter="test" >
+            <ul class="layui-nav layui-nav-tree" lay-filter="test" lay-shrink="all" >
                 <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;"><i class="layui-icon">&#xe642;</i>员工管理</a>
+                    <a class="" href="javascript:;"><i class="layui-icon">&#xe613;</i>员工管理</a>
                     <dl class="layui-nav-child">
                         <dd><a href="StaffServlet?method=getStaffList" target="contextPage">
                             员工列表
@@ -55,7 +49,7 @@
                     </dl>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="javascript:;"><i class="layui-icon">&#xe642;</i>部门管理</a>
+                    <a href="javascript:;"><i class="layui-icon">&#xe60a;</i>部门管理</a>
                     <dl class="layui-nav-child">
                         <dd><a href="DeptServlet?method=getDeptList" target="contextPage">部门列表</a></dd>
                     </dl>

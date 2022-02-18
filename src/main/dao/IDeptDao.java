@@ -15,4 +15,8 @@ public interface IDeptDao {
     int countAll(Dept d) throws SQLException;
 
     int updateDept(Dept d);
+
+    int deleteDept(Dept d);
+
+    int addDept(Dept d);
 }

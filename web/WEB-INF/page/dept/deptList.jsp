@@ -53,7 +53,7 @@
                 <div class="layui-card-header">部门列表</div>
                 <div class="layui-card-body">
                     <div>
-                        <button class="layui-btn layui-btn-sm" onclick="openWin();">添加</button>
+                        <button class="layui-btn layui-btn-sm" onclick="addDeptWin();">添加</button>
                     </div>
                     <table class="layui-table">
                         <!-- 设置每一个单元格的占得宽度 -->
@@ -80,7 +80,7 @@
                                 <td>${d.leaderName }</td>
                                 <td>
                                     <button class="layui-btn layui-btn-primary layui-btn-sm" onclick="openWin(${d.id})"><i class="layui-icon">&#xe642;</i></button>
-                                    <button class="layui-btn layui-btn-primary layui-btn-sm" onclick=""><i class="layui-icon">&#xe640;</i></button>
+                                    <button class="layui-btn layui-btn-primary layui-btn-sm" onclick="deleteOpenWin(${d.id})"><i class="layui-icon">&#xe640;</i></button>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -138,7 +138,44 @@
             content: "PageServlet?method=updateDeptPage&id="+id,
         });
     }
-
+    function deleteOpenWin(id){
+        layer.confirm("确认要删除吗，删除后不能恢复", { title: "部门删除确认" },
+            function (index) {
+                layer.close(index);
+                $.ajax({
+                    url : 'DeptServlet?method=deleteDept',
+                    method:'POST',
+                    data :{'id':id},
+                    success : function(msg) {
+                        /*下架成功*/
+                        if (msg == "1") {
+                            layer.alert('部门删除成功', {
+                                title: "删除操作",
+                                btn: ['确定']
+                            },function (index, item) {
+                                location.reload();
+                            });
+                        } else{
+                            layer.alert('部门删除失败', {
+                                    title: "删除操作",
+                                    btn: ['确定']
+                                },
+                                function (index, item) {
+                                    location.reload();
+                                });
+                        }
+                    }
+                });
+            })
+    }
+    function addDeptWin(){
+        layer.open({
+            type: 2,
+            title: "添加员工信息",
+            area: ['450px', '530px'],
+            content: "PageServlet?method=addDeptPage",
+        });
+    }
 </script>
 </html>
 

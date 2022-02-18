@@ -20,7 +20,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">姓名</label>
             <div class="layui-input-block"style="width: 60%;">
-                <input type="text" id="bname" name="staffName"  lay-verify="title" class="layui-input">
+                <input type="text" id="staffName" name="staffName"  lay-verify="title" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
@@ -38,7 +38,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">联系方式</label>
             <div class="layui-input-block" style="width: 60%;">
-                <input type="text" id="bphone" name="phone"  lay-verify="title" class="layui-input">
+                <input type="text" id="phone" name="phone"  lay-verify="title" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
@@ -63,6 +63,59 @@
 <script src="${pageContext.request.contextPath}/static/assets/libs/jquery-1.12.4/jquery.min.js"></script>
 <script src="${pageContext.request.contextPath}/static/layui/layui.js"></script>
 <script>
+    $(function(){
+        //为表单元素添加失去焦点事件
+        $("form :input").blur(function(){
+            var $parent = $(this).parent();
+            $parent.find(".msg").remove(); //删除以前的提醒元素（find()：查找匹配元素集中元素的所有匹配元素）
+            //验证手机号
+            if($(this).is("#phone")){
+                var mobileVal = $.trim(this.value);
+                // var regMobile = /^1[3|4|5|7|8][0-9]{9}$/;
+                if(mobileVal == ""){
+                    var errorMsg = " 请输入手机号！";
+                    $parent.append("<span class='msg onError' style='color: red'>" + errorMsg + "</span>");
+                } else if(!(/^1[0-9]{10}$/.test(mobileVal))){
+                    var errorMsg = " 请输入正确的手机号！";
+                    $parent.append("<span class='msg onError' style='color: red'>" + errorMsg + "</span>");
+                }
+                else{
+                    var okMsg=" 输入正确";
+                    $parent.append("<span class='msg onSuccess'style='color: green'>" + okMsg + "</span>");
+                }
+            }
+            //验证密码
+            if($(this).is("#pass")){
+                var psdVal = $.trim(this.value);
+                var regPsd = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,20}$/;
+                if(psdVal== "" || !regPsd.test(psdVal)){
+                    var errorMsg = " 密码为6-20位字母、数字的组合！";
+                    $parent.append("<span class='msg onError'style='color: red'>" + errorMsg + "</span>");
+                }
+                else{
+                    var okMsg=" 输入正确";
+                    $parent.append("<span class='msg onSuccess'style='color: green'>" + okMsg + "</span>");
+                }
+            }
+            if($(this).is("#repass")){
+                var psdVal = $.trim(this.value);
+                var psd = $("#pass").val();
+                if(psd != psdVal){
+                    var errorMsg = " 两次输入的密码不一致";
+                    $parent.append("<span class='msg onError'style='color: red'>" + errorMsg + "</span>");
+                }
+                else{
+                    var okMsg=" 输入正确";
+                    $parent.append("<span class='msg onSuccess'style='color: green'>" + okMsg + "</span>");
+                }
+            }
+        }).keyup(function(){
+            //triggerHandler 防止事件执行完后，浏览器自动为标签获得焦点
+            $(this).triggerHandler("blur");
+        }).focus(function(){
+            $(this).triggerHandler("blur");
+        });
+    })
     var form = document.getElementsByTagName('form')[0];
     form.addEventListener('submit',function(e){
         e.preventDefault();

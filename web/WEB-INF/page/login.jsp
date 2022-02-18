@@ -92,7 +92,6 @@
         if(mobile == '' ||  psd == ''){
             return;
         }
-        console.info(mobile+" "+psd);
         $.ajax({
             url: "StaffServlet?method=loginCheck",
             type: "POST",

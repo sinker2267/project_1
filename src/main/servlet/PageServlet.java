@@ -48,4 +48,11 @@ public class PageServlet extends BaseServlet{
         req.getRequestDispatcher("/WEB-INF/page/dept/updateDept.jsp").forward(req, res);
     }
 
+    //跳转到添加部门页面
+    public void addDeptPage(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException, SQLException {
+        staffService.getLeaderList(req);
+        req.getRequestDispatcher("/WEB-INF/page/dept/addDept.jsp").forward(req, res);
+    }
+
+
 }
