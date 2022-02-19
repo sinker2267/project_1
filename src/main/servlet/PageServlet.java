@@ -54,5 +54,9 @@ public class PageServlet extends BaseServlet{
         req.getRequestDispatcher("/WEB-INF/page/dept/addDept.jsp").forward(req, res);
     }
 
-
+    //退出
+    public void restartPage(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException, SQLException {
+        req.getSession().invalidate();
+        req.getRequestDispatcher("/WEB-INF/page/login.jsp").forward(req, res);
+    }
 }

@@ -29,11 +29,6 @@
             <li class="layui-nav-item layui-hide layui-show-md-inline-block">
                 <a href="javascript:;">${sessionScope.staff.staffName}</a>
             </li>
-            <li class="layui-nav-item" lay-header-event="menuRight" lay-unselect>
-                <a href="javascript:;">
-                    <i class="layui-icon layui-icon-more-vertical"></i>
-                </a>
-            </li>
         </ul>
     </div>
     <div class="layui-side layui-bg-black">
@@ -41,18 +36,13 @@
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree" lay-filter="test" lay-shrink="all" >
                 <li class="layui-nav-item layui-nav-itemed">
-                    <a class="" href="javascript:;"><i class="layui-icon">&#xe613;</i>员工管理</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="StaffServlet?method=getStaffList" target="contextPage">
-                            员工列表
-                        </a></dd>
-                    </dl>
+                    <a href="StaffServlet?method=getStaffList"target="contextPage"><i class="layui-icon">&#xe613;</i>员工管理</a>
                 </li>
                 <li class="layui-nav-item">
-                    <a href="javascript:;"><i class="layui-icon">&#xe60a;</i>部门管理</a>
-                    <dl class="layui-nav-child">
-                        <dd><a href="DeptServlet?method=getDeptList" target="contextPage">部门列表</a></dd>
-                    </dl>
+                    <a href="DeptServlet?method=getDeptList" target="contextPage"><i class="layui-icon">&#xe60a;</i>部门管理</a>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="PageServlet?method=restartPage"><i class="layui-icon">&#xe682;</i>退出</a>
                 </li>
             </ul>
         </div>

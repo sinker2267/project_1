@@ -38,7 +38,7 @@ public class StaffService implements IStaffService{
 		//向session添加用户信息
 		HttpSession session = req.getSession();
 		session.setAttribute("staff", staff);
-		session.setMaxInactiveInterval(10);
+		session.setMaxInactiveInterval(30 * 60);
 		return true;
 	}
 
@@ -56,7 +56,7 @@ public class StaffService implements IStaffService{
 		if(staffDao.add(staff) == 1){
 			HttpSession session = req.getSession();
 			session.setAttribute("staff", staff);
-			session.setMaxInactiveInterval(10 * 60);
+			session.setMaxInactiveInterval(30 * 60);
 			//保存到数据库中
 			return 1;
 		}
